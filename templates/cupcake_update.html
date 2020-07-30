@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Cupcake Update</title>
+</head>
+
+<body>
+    <div class="container" style="display:none;" id="add-form">
+        <h1>Update the cupcake</h1>
+        <form>
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden'%}
+            <div>
+                {{field.label}}
+                {{field}}
+
+                {% for err in field.errors %}
+                {{err}}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success" id="update-save-btn">Save</button>
+        </form>
+        <a href="/" class="btn btn-danger">Home</a>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="/static/cupcake.js"></script>
+
+</html>

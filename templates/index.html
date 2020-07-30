@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container" id="table-container">
+        <h1 class="text-center display-3">Cupcakes List</h1>
+        <table id="cupcake-table" class="table">
+            <tr class="thead-dark">
+                <th>Flavor</th>
+                <th>Size</th>
+                <th>Rating</th>
+                <th>Image</th>
+            </tr>
+        </table>
+        <button class="btn btn-success" id="show-form-btn">Add a cupcake</button>
+    </div>
+    <div class="container" style="display:none;" id="add-form">
+        <h2>Add a cupcake</h2>
+        <form>
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden'%}
+            <div>
+                {{field.label}}
+                {{field}}
+
+                {% for err in field.errors %}
+                {{err}}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success" id="add-btn">Add</button>
+            <button class="btn btn-danger" id="cancel-btn">Cancel</button>
+        </form>
+    </div>
+    <div class="container" style="display:none;" id="update-form">
+        <h1>Update a cupcake</h1>
+        <form>
+            {{ update_form.hidden_tag() }}
+            {% for field in update_form if field.widget.input_type != 'hidden'%}
+            <div>
+                {{field.label}}
+                {{field}}
+
+                {% for err in field.errors %}
+                {{err}}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success" id="update-save-btn">Save</button>
+            <button class="btn btn-danger" id="update-cancel-btn">Cancel</button>
+        </form>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="/static/cupcake.js"></script>
+<script>
+    let getTable = new Cupcake();
+    Cupcake.fetchAllCupcakes();
+</script>
+
+</html>
